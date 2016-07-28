@@ -1,0 +1,49 @@
+<div class="container">
+	<div class="row"> <!-- The shooting or assault div -->
+		<div class="col s6 offset-s3 center-align">
+			<h3>Calculation Type</h3>
+			<form action="#">
+	      <input name="group1" ng-model="shootingBool" type="radio" id="shooting" ng-value="true"/>
+	      <label for="shooting">Shooting</label>
+	      <input name="group1" ng-model="shootingBool" type="radio" id="closeCombat" ng-value="false" />
+	      <label for="closeCombat">Close Combat</label>
+		  </form>
+		 </div> 
+		 <div class="row">
+		 	<div class="center-align col s10 offset-s1" ng-show="shootingBool">
+		 		<input type="text" ng-model="numOfDice" name="numOfDice" placeholder="Number of dice rolled">
+		 		<input type="text" ng-model="ballisticSkill" name="balSkill" placeholder="Ballistic Skill of Shooter">
+		 		<form action="#">
+		      <input name="group2" ng-model="rerollAll" type="radio" id="rerollAll" ng-value="true"/>
+		      <label for="rerollAll">Reroll All</label>
+		      <input name="group2" ng-model="rerollOnes" type="radio" id="rerollOnes" ng-value="true" />
+		      <label for="rerollOnes">Reroll 1's</label> 
+		      <input name="group2" ng-model="rerollOnes" type="radio" id="rerollSingle" ng-value="true"/>
+		      <label for="rerollSingle">Reroll 1 die</label>
+		      <input name="group2" ng-model="autoHit" type="radio" id="autoHit" ng-value="true" />
+		      <label for="autoHit">Automatically Hit</label>
+		  	</form>
+		 		<p>Success: {{successesShooting}}</p>
+		 	</div>
+		 	<div class="center-align col s10 offset-s1" ng-show="!shootingBool">
+		 		<input ng-model="numOfDice" name="numOfDice" type="text" placeholder="Number of dice rolled">
+		 		<input ng-model="attackerWepSkill" type="text" name="atkWS" placeholder="Weapon Skill of Attacker">
+		 		<input ng-model="defenderWepSkill" type="text" name="defWS" placeholder="Weapon Skill of Defender">
+		 		<form action="#">
+		      <input name="group3" ng-model="rerollAll" type="radio" id="rerollAll" ng-value="true"/>
+		      <label for="rerollAll">Reroll All</label>
+		      <input name="group3" ng-model="rerollOnes" type="radio" id="rerollOnes" ng-value="true" />
+		      <label for="rerollOnes">Reroll 1's</label> 
+		      <input name="group3" ng-model="rerollOnes" type="radio" id="rerollSingle" ng-value="true"/>
+		      <label for="rerollSingle">Reroll 1 die</label>
+		      <input name="group3" ng-model="autoHit" type="radio" id="autoHit" ng-value="true" />
+		      <label for="autoHit">Automatically Hit</label>
+		  	</form>
+		 		<p>Success: {{successesCloseCombat}}</p>
+		 	</div>
+		</div> <!-- closing div for the inputs -->
+		<div class="row">
+			<input ng-model="weaponStrength" type="text" name="wepStr">
+		</div>
+	</div> <!-- shooting and assault row div -->
+</div> <!-- container div -->
