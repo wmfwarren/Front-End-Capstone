@@ -3,24 +3,31 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 	<title>DiceHammer</title>
-	<link rel="stylesheet" href="">
+	<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link type="text/css" rel="stylesheet" href="lib/node_modules/materialize-css/dist/css/materialize.min.css"  media="screen,projection"/>
+	<link rel="stylesheet" href="css/main.css">
 </head>
-<body>
-
+<body ng-app="diceHammerApp">
+<div ng-view></div>
 
 <!-- Third Party Scripts -->
 	<script src="lib/node_modules/angular/angular.min.js"></script>
 	<script src="lib/node_modules/angular-route/angular-route.min.js"></script>
 	<script src="lib/node_modules/firebase/firebase.js"></script>
 	<script src="lib/node_modules/jquery/dist/jquery.min.js"></script>
-	<script src="/lib/node_modules/materialize-css/dist/js/materialize.min.js"></script>
+	<script src="lib/node_modules/materialize-css/dist/js/materialize.min.js"></script>
 	<!-- Base app -->
-	<script src="/app/app.js"></script>
+	<script src="app/app.js"></script>
 	<!-- Credentials -->
-	<script src="/app/values/firebaseAuth.js"></script>
-	<!-- Factories -->
+	<script src="app/values/firebaseAuth.js"></script>
+	<!-- Factories and services -->
+	<script src="app/services/objectService.js"></script>
+	<script src="app/factories/authFactory.js"></script>
 	<!-- Directives -->
 	<!-- Controllers -->
+	<script src="app/controllers/loginCTRL.js"></script>
+	<script src="app/controllers/menuCTRL.js"></script>
 </body>
 </html>
