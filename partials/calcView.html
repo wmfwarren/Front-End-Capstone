@@ -2,14 +2,14 @@
 	<div class="row"> <!-- The shooting or assault div -->
 		<div class="col s6 offset-s3 center-align">
 			<h3>Calculation Type</h3>
-			<form id="shootingOrCC" action="#">
+			<form id="shootingOrCloseCombat" action="#">
 	      <input name="group1" ng-model="shootingBool" type="radio" id="shooting" ng-value="true"/>
 	      <label for="shooting">Shooting</label>
 	      <input name="group1" ng-model="shootingBool" type="radio" id="closeCombat" ng-value="false" />
 	      <label for="closeCombat">Close Combat</label>
 		  </form>
-		 </div> 
-
+		</div> 
+	</div> <!-- shooting and assault row div -->
 
 		 <!-- TO Hit calcs -->
 
@@ -67,7 +67,7 @@
 		<!-- Infantry and Vehicle damage -->
 
 		<div class="row">
-			<div ng-if="successesCloseCombat || successesShooting">
+			<div ng-show="successesCloseCombat || successesShooting">
 				<div class="col s4 offset-s4 center-align" >
 					<h3>Vehicle or Infantry</h3>
 					<form action="#">
@@ -121,32 +121,60 @@
 				   <h4>Success: {{successesVsVehicle}}</h4>
 				</div> <!-- for vehicles -->
 			</div> <!-- armor and wound div -->
+		</div> <!-- infantry and vehicle damage row -->
+
 
 			<!-- Data for the first Save -->
 			<div class="row">
-				<div ng-if="successesVsVehicle || successesVsInfantry">
+				<div ng-show="successesVsVehicle || successesVsInfantry">
 					<div class="col s4 offset-s4 center-align">
-						<input type="text" name="firstSaveVal" ng-model="FirstSave" placeholder="First Save Value">
-						<form  action="#">
+						<input type="text" name="firstSaveVal" ng-model="firstSave" placeholder="First Save Target">
+					<form  action="#">
 						<p>
 				      <input name="group1110999" ng-model="rerollAllSave1" type="radio" id="rerollAllSave1" ng-value="true"/>
 				      <label for="rerollAllSave1">Reroll All</label>
 				      <input name="group1110999" ng-model="rerollAllSave1" type="radio" id="noRerollAllSave1No" ng-value="false"/>
 				      <label for="noRerollAllSave1No">No Reroll All</label>
 				    </p>
-				   </form>
-				   <form  action="#">
 						<p>
 				      <input name="group1110989" ng-model="rerollOnesSave1" type="radio" id="rerollOnesSave1" ng-value="true"/>
 				      <label for="rerollOnesSave1">Reroll All 1's</label>
 				      <input name="group1110989" ng-model="rerollOnesSave1" type="radio" id="noRerollOnesSave1No" ng-value="false"/>
 				      <label for="noRerollOnesSave1No">No Reroll All 1's</label>
 				    </p>
-				   </form>
-				   <h4>Success: {{firstSaveSuccesses}}</h4>
-					</div>
+				    <p>
+				      <input name="secondSaveBoolradio" ng-model="secondSaveBool" type="radio" id="secondSaveYes" ng-value="true"/>
+				      <label for="secondSaveYes">Another Save</label>
+				      <input name="secondSaveBoolradio" ng-model="secondSaveBool" type="radio" id="secondSaveNo" ng-value="false"/>
+				      <label for="secondSaveNo">No Second Save</label>
+				    </p>
+				  </form>
+				  <h4>Success: {{firstSaveSuccesses}}</h4>
 				</div>
-			</div>
-		</div>
-	</div> <!-- shooting and assault row div -->
+			</div> <!-- first save ng-if -->
+		</div> <!-- row for the first save -->
+		
+		<!-- Second save -->
+		<div class="row">
+			<div ng-show="secondSaveBool">
+				<div class="col s4 offset-s4 center-align">
+					<input type="text" name="secondSaveVal" ng-model="secondSave" placeholder="Second Save Target">
+					<form  action="#">
+					<p>
+						<input name="rerollsecondsave" ng-model="rerollAllSave2" type="radio" id="rerollAllSave2" ng-value="true"/>
+			      <label for="rerollAllSave2">Reroll All</label>
+			      <input name="rerollsecondsave" ng-model="rerollAllSave2" type="radio" id="RerollAllSave2No" ng-value="false"/>
+			      <label for="RerollAllSave2No">No Reroll All</label>
+					</p>
+					<p>
+			     	<input name="reroll1ssecondsave" ng-model="reroll1sSave2" type="radio" id="reroll1sSave2" ng-value="true"/>
+			      <label for="reroll1sSave2">Reroll 1's</label>
+			      <input name="rerollsecondsave" ng-model="reroll1sSave2" type="radio" id="noReroll1sSave2No" ng-value="false"/>
+			      <label for="noReroll1sSave2No">No Reroll 1's</label>
+			    </p>
+					</form>
+					<h4>Success: {{secondSaveSuccesses}}</h4>
+				</div>
+			</div> <!-- ng show for second save -->
+		</div> <!-- row class for second save -->
 </div> <!-- container div -->

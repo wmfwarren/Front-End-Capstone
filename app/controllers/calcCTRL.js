@@ -17,7 +17,11 @@ app.controller("calcCTRL", function ($scope, $route, dataFactory) {
 	//save 1
 	$scope.rerollAllSave1 = false;
 	$scope.rerollOnesSave1 = false;
+	$scope.secondSaveBool = false;
 	//save 2
+	$scope.rerollAllSave2 = false;
+	$scope.reroll1sSave2 = false;
+	//these are testing vars
 	$scope.successesShooting = 1;
 	$scope.successesVsInfantry = 1;
 	$scope.firstSaveSuccesses = 1;
