@@ -11,25 +11,22 @@ app.service("objectService", function(){
 		this.tags = [];
 	};
 
-	this.AttackType = function(){
-		this.shootingAttack = true; //true for shooting false for assault
-		this.calcID = null;
-	};
-
-	this.ToHit = function(dice, ID){
-		this.ballisticSkill = 0; //1-10 is legal
-		this.attackerWepSkill = 0; //1-10 is legal
-		this.defenderWepSkill = 0; //1-10 is legal
-		this.numOfDice = dice;
+	this.ToHit = function(){
+		this.shootingAttack = null; //boolean
+		this.ballisticSkill = 0; //1-10 is legal; 0 is a assault attack
+		this.attackerWepSkill = 0; //1-10 is legal; 0 is shooting
+		this.defenderWepSkill = 0; //1-10 is legal; 0 is shooting
+		this.numOfDice = null;
 		this.successes = 0;
 		this.rerollOnes = false;
 		this.rerollAll = false;
 		this.rerollSingle = false;
+		this.rerollTarget = null;
 		this.autoHit = false;
-		this.calcID = ID;
+		this.calcID = null;
 	};
 
-	this.ToWound = function(hits, ID){
+	this.ToWound = function(hits){
 		this.successfulHits = hits;
 		this.toughness = 0;
 		this.weaponStrength = 0; //1-10 is legal
@@ -39,32 +36,32 @@ app.service("objectService", function(){
 		this.autoWoundOnX = false;
 		this.xForAutowound = 7;
 		this.successes = 0;
-		this.calcID = ID;
+		this.calcID = null;
 	};
 
-	this.ArmorPen = function(hits, ID){
+	this.ArmorPen = function(hits){
 		this.successfulHits = hits;
 		this.dicePerHit = 0;
 		this.successes = 0;
 		this.armorVal = 10; //10-15 is legal
 		this.weaponStrength = 0; //1-10 is legal
 		this.rerollAll = false;
-		this.calcID = ID;
+		this.calcID = null;
 	};
 
-	this.FirstSave = function(wounds, ID, getSave){
+	this.FirstSave = function(wounds, getSave){
 		this.successfulWounds = wounds;
 		this.saveBool = getSave; //true of false
 		this.successes = 0;
 		this.target = 0; //2-6 are legal
-		this.calcID = ID;
+		this.calcID = null;
 	};
 
-	this.SecondSave = function(unsaved, ID, getSave){
+	this.SecondSave = function(unsaved, getSave){
 		this.successfulWounds = unsaved;
 		this.saveBool = getSave; //true of false
 		this.successes = 0;
 		this.target = 0; //2-6 are legal
-		this.calcID = ID;
+		this.calcID = null;
 	};
 })
