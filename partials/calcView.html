@@ -13,168 +13,178 @@
 
 		 <!-- TO Hit calcs -->
 
-		 <div class="row">
-		 	<div class="center-align col s10 offset-s1" ng-show="shootingBool">
-		 		<input type="text" ng-model="numOfDice" name="numOfDice" placeholder="Number of dice rolled">
-		 		<input type="text" ng-model="ballisticSkill" name="balSkill" placeholder="Ballistic Skill of Shooter">
-		 		<form action="#">
-		      <p>
-			      <input name="group2" ng-model="rerollAll" type="radio" id="rerollAll" ng-value="true"/>
-			      <label for="rerollAll">Reroll All</label>
-			      <input name="group2" ng-model="rerollAll" type="radio" id="rerollAllNo" ng-value="false"/>
-			      <label for="rerollAllNo">Reroll None</label>
-			    </p>  
-			    <p>
-			      <input name="group44444" ng-model="rerollOnes" type="radio" id="rerollOnes" ng-value="true" />
-			      <label for="rerollOnes">Reroll 1's</label>
-			      <input name="group44444" ng-model="rerollOnes" type="radio" id="rerollOnesNo" ng-value="false" />
-			      <label for="rerollOnesNo">No Reroll 1's</label> 
-			    </p>
-			    <p>
-			      <input name="group1231" ng-model="rerollSingle" type="radio" id="rerollSingle" ng-value="true"/>
-			      <label for="rerollSingle">Reroll 1 Die</label>   
-			      <input name="group1231" ng-model="rerollSingle" type="radio" id="rerollSingleNo" ng-value="false"/>
-			      <label for="rerollSingleNo">No Reroll 1 Die</label>
-			    </p>
-			    <p>
-			      <input name="group124" ng-model="autoHit" type="radio" id="autoHit" ng-value="true" />
-			      <label for="autoHit">Automatically Hit</label>
-			      <input name="group124" ng-model="autoHit" type="radio" id="autoHitNo" ng-value="false" />
-			      <label for="autoHitNo">Do Not Automatically Hit</label>
-			    </p>
-		  	</form>
-		 		<h4>Success: {{successesShooting}}</h4>
-		 	</div>
-		 	<div class="center-align col s10 offset-s1" ng-show="!shootingBool">
-		 		<input ng-model="numOfDice" name="numOfDice" type="text" placeholder="Number of dice rolled">
-		 		<input ng-model="attackerWepSkill" type="text" name="atkWS" placeholder="Weapon Skill of Attacker">
-		 		<input ng-model="defenderWepSkill" type="text" name="defWS" placeholder="Weapon Skill of Defender">
-		 		<form action="#">
-		      <input name="group3" ng-model="rerollAll" type="radio" id="rerollAll" ng-value="true"/>
+	<div class="row">
+	 	<div class="center-align col s10 offset-s1" ng-show="shootingBool">
+	 		<input type="text" ng-model="numOfDiceShooting" name="numOfDice" placeholder="Number of dice rolled">
+	 		<input type="text" ng-model="ballisticSkill" name="balSkill" placeholder="Ballistic Skill of Shooter">
+	 		<form action="#">
+	      <p>
+		      <input name="group2" ng-model="rerollAll" type="radio" id="rerollAll" ng-value="true"/>
 		      <label for="rerollAll">Reroll All</label>
-		      <input name="group3" ng-model="rerollOnes" type="radio" id="rerollOnes" ng-value="true" />
-		      <label for="rerollOnes">Reroll 1's</label> 
-		      <input name="group3" ng-model="rerollOnes" type="radio" id="rerollSingle" ng-value="true"/>
-		      <label for="rerollSingle">Reroll 1 die</label>
-		      <input name="group3" ng-model="autoHit" type="radio" id="autoHit" ng-value="true" />
+		      <input name="group2" ng-model="rerollAll" type="radio" id="rerollAllNo" ng-value="false"/>
+		      <label for="rerollAllNo">Reroll None</label>
+		    </p>  
+		    <p>
+		      <input name="group44444" ng-model="rerollOnes" type="radio" id="rerollOnes" ng-value="true" />
+		      <label for="rerollOnes">Reroll 1's</label>
+		      <input name="group44444" ng-model="rerollOnes" type="radio" id="rerollOnesNo" ng-value="false" />
+		      <label for="rerollOnesNo">No Reroll 1's</label> 
+		    </p>
+		    <p>
+		      <input name="group1231" ng-model="rerollSingle" type="radio" id="rerollSingle" ng-value="true"/>
+		      <label for="rerollSingle">Reroll 1 Die</label>   
+		      <input name="group1231" ng-model="rerollSingle" type="radio" id="rerollSingleNo" ng-value="false"/>
+		      <label for="rerollSingleNo">No Reroll 1 Die</label>
+		    </p>
+		    <p>
+		      <input name="group124" ng-model="autoHit" type="radio" id="autoHit" ng-value="true" />
 		      <label for="autoHit">Automatically Hit</label>
-		  	</form>
-		 		<h4>Success: {{successesCloseCombat}}</h4>
-		 	</div>
-		</div> <!-- closing div for the inputs -->
+		      <input name="group124" ng-model="autoHit" type="radio" id="autoHitNo" ng-value="false" />
+		      <label for="autoHitNo">Do Not Automatically Hit</label>
+		    </p>
+	  	</form>
+	 		<h4>Success: {{successesShooting}}</h4>
+	 	</div>
+	 	<div class="center-align col s10 offset-s1" ng-show="!shootingBool">
+	 		<input ng-model="numOfDiceCloseCombat" name="numOfDice" type="text" placeholder="Number of dice rolled">
+	 		<input ng-model="attackerWepSkill" type="text" name="atkWS" placeholder="Weapon Skill of Attacker">
+	 		<input ng-model="defenderWepSkill" type="text" name="defWS" placeholder="Weapon Skill of Defender">
+	 		<form action="#">
+	      <input name="group3" ng-model="rerollAll" type="radio" id="rerollAll" ng-value="true"/>
+	      <label for="rerollAll">Reroll All</label>
+	      <input name="group3" ng-model="rerollOnes" type="radio" id="rerollOnes" ng-value="true" />
+	      <label for="rerollOnes">Reroll 1's</label> 
+	      <input name="group3" ng-model="rerollOnes" type="radio" id="rerollSingle" ng-value="true"/>
+	      <label for="rerollSingle">Reroll 1 die</label>
+	      <input name="group3" ng-model="autoHit" type="radio" id="autoHit" ng-value="true" />
+	      <label for="autoHit">Automatically Hit</label>
+	  	</form>
+	 		<h4>Success: {{successesCloseCombat}}</h4>
+	 	</div>
+	</div> <!-- closing div for the inputs -->
 
 
 		<!-- Infantry and Vehicle damage -->
 
-		<div class="row">
-			<div ng-show="successesCloseCombat || successesShooting">
-				<div class="col s4 offset-s4 center-align" >
-					<h3>Vehicle or Infantry</h3>
-					<form action="#">
-			      <input name="group4" ng-model="infantryBool" type="radio" id="vehicle" ng-value="false"/>
-			      <label for="vehicle">Vehicle</label>
-			      <input name="group4" ng-model="infantryBool" type="radio" id="infantry" ng-value="true" />
-			      <label for="infantry">Infantry</label>
-		 			</form>
-				</div> <!-- armor or infantry selection div -->
-				<div class="col s10 offset-s1 center-align" ng-show="infantryBool">
-					<input type="text" name="wepStrength" ng-model="weaponStrength" placeholder="Weapon Strength">
-					<input type="text" name="toughness" ng-model="defenderToughness" placeholder="Defender Toughness">
-					<form  action="#">
+	<div class="row">
+		<div ng-show="successesCloseCombat || successesShooting">
+			<div class="col s4 offset-s4 center-align" >
+				<h3>Vehicle or Infantry</h3>
+				<form action="#">
+		      <input name="group4" ng-model="infantryBool" type="radio" id="vehicle" ng-value="false"/>
+		      <label for="vehicle">Vehicle</label>
+		      <input name="group4" ng-model="infantryBool" type="radio" id="infantry" ng-value="true" />
+		      <label for="infantry">Infantry</label>
+	 			</form>
+			</div> <!-- armor or infantry selection div -->
+			<div class="col s10 offset-s1 center-align" ng-show="infantryBool">
+				<input type="text" name="wepStrength" ng-model="weaponStrength" placeholder="Weapon Strength">
+				<input type="text" name="toughness" ng-model="defenderToughness" placeholder="Defender Toughness">
+				<form  action="#">
+				<p>
+		      <input name="group111" ng-model="rerollAllWound" type="radio" id="rerollAllInfantry" ng-value="true"/>
+		      <label for="rerollAllInfantry">Reroll All</label>
+		      <input name="group111" ng-model="rerollAllWound" type="radio" id="noRerollAllInfantry" ng-value="false" checked />
+		      <label for="noRerollAllInfantry">No Reroll All</label>
+		    </p>
+		    <p>
+		      <input name="group123" ng-model="rerollOnesWound" type="radio" id="rerollOnesInfantry" ng-value="true" />
+		      <label for="rerollOnesInfantry">Reroll 1's</label>
+		      <input name="group123" ng-model="rerollOnesWound" type="radio" id="noRerollOnesInfantry" ng-value="false"/>
+		      <label for="noRerollOnesInfantry">No Reroll 1's</label>
+		    </p>
+		    <p>
+		      <input type="radio" name="autoWoundOnX" ng-model="autoWoundOnX" id="autoWound-Infantry" ng-value="true"/>
+		      <label for="autoWound-Infantry">Auto-wound on Value</label>
+		      <input type="radio" name="autoWoundOnX" ng-model="autoWoundOnX" id="autoWoundNo-Infantry" ng-value="false"/>
+		      <label for="autoWoundNo-Infantry">No Auto-wound</label>
+		    </p>
+		    </form>
+		    <div class="col s4 offset-s4 center-align" ng-show="autoWoundOnX">
+		    	<input type="text" name="autoWoundVal" ng-model="autoWoundVal" placeholder="Auto Wound Value">
+		    </div>
+		    <h4>Success: {{successesVsInfantry}}</h4>
+			</div> <!-- for infantry -->
+			<!-- Below is for vehicles -->
+			<div class="center-align col s10 offset-s1" ng-show="!infantryBool">
+				<input type="text" name="wepStrength" ng-model="weaponStrength" placeholder="Weapon Strength">
+				<input type="text" name="AV" ng-model="armorValue" placeholder="Defender Armor Value">
+				<input type="text" name="APDice" ng-model="numOfAPDice" placeholder="Number of Dice to Roll">
+				<form  action="#">
 					<p>
-			      <input name="group111" ng-model="rerollAllWound" type="radio" id="rerollAllInfantry" ng-value="true"/>
-			      <label for="rerollAllInfantry">Reroll All</label>
-			      <input name="group111" ng-model="rerollAllWound" type="radio" id="noRerollAllInfantry" ng-value="false" checked />
-			      <label for="noRerollAllInfantry">No Reroll All</label>
+			      <input name="group11109" ng-model="rerollAllPen" type="radio" id="rerollAllVehicle" ng-value="true"/>
+			      <label for="rerollAllVehicle">Reroll All</label>
+			      <input name="group11109" ng-model="rerollAllPen" type="radio" id="noRerollAllVehicle" ng-value="false" checked />
+			      <label for="noRerollAllVehicle">No Reroll All</label>
 			    </p>
-			    <p>
-			      <input name="group123" ng-model="rerollOnesWound" type="radio" id="rerollOnesInfantry" ng-value="true" />
-			      <label for="rerollOnesInfantry">Reroll 1's</label>
-			      <input name="group123" ng-model="rerollOnesWound" type="radio" id="noRerollOnesInfantry" ng-value="false"/>
-			      <label for="noRerollOnesInfantry">No Reroll 1's</label>
-			    </p>
-			    <p>
-			      <input type="radio" name="autoWoundOnX" ng-model="autoWoundOnX" id="autoWound-Infantry" ng-value="true"/>
-			      <label for="autoWound-Infantry">Auto-wound on Value</label>
-			      <input type="radio" name="autoWoundOnX" ng-model="autoWoundOnX" id="autoWoundNo-Infantry" ng-value="false"/>
-			      <label for="autoWoundNo-Infantry">No Auto-wound</label>
-			    </p>
-			    </form>
-			    <div class="col s4 offset-s4 center-align" ng-show="autoWoundOnX">
-			    	<input type="text" name="autoWoundVal" ng-model="autoWoundVal" placeholder="Auto Wound Value">
-			    </div>
-			    <h4>Success: {{successesVsInfantry}}</h4>
-				</div> <!-- for infantry -->
-				<!-- Below is for vehicles -->
-				<div class="center-align col s10 offset-s1" ng-show="!infantryBool">
-					<input type="text" name="wepStrength" ng-model="weaponStrength" placeholder="Weapon Strength">
-					<input type="text" name="AV" ng-model="armorValue" placeholder="Defender Armor Value">
-					<input type="text" name="APDice" ng-model="numOfAPDice" placeholder="Number of Dice to Roll">
-					<form  action="#">
-						<p>
-				      <input name="group11109" ng-model="rerollAllPen" type="radio" id="rerollAllVehicle" ng-value="true"/>
-				      <label for="rerollAllVehicle">Reroll All</label>
-				      <input name="group11109" ng-model="rerollAllPen" type="radio" id="noRerollAllVehicle" ng-value="false" checked />
-				      <label for="noRerollAllVehicle">No Reroll All</label>
-				    </p>
-				   </form>
-				   <h4>Success: {{successesVsVehicle}}</h4>
-				</div> <!-- for vehicles -->
-			</div> <!-- armor and wound div -->
-		</div> <!-- infantry and vehicle damage row -->
+			   </form>
+			   <h4>Success: {{successesVsVehicle}}</h4>
+			</div> <!-- for vehicles -->
+		</div> <!-- armor and wound div -->
+	</div> <!-- infantry and vehicle damage row -->
 
 
-			<!-- Data for the first Save -->
-			<div class="row">
-				<div ng-show="successesVsVehicle || successesVsInfantry">
-					<div class="col s4 offset-s4 center-align">
-						<input type="text" name="firstSaveVal" ng-model="firstSave" placeholder="First Save Target">
-					<form  action="#">
-						<p>
-				      <input name="group1110999" ng-model="rerollAllSave1" type="radio" id="rerollAllSave1" ng-value="true"/>
-				      <label for="rerollAllSave1">Reroll All</label>
-				      <input name="group1110999" ng-model="rerollAllSave1" type="radio" id="noRerollAllSave1No" ng-value="false"/>
-				      <label for="noRerollAllSave1No">No Reroll All</label>
-				    </p>
-						<p>
-				      <input name="group1110989" ng-model="rerollOnesSave1" type="radio" id="rerollOnesSave1" ng-value="true"/>
-				      <label for="rerollOnesSave1">Reroll All 1's</label>
-				      <input name="group1110989" ng-model="rerollOnesSave1" type="radio" id="noRerollOnesSave1No" ng-value="false"/>
-				      <label for="noRerollOnesSave1No">No Reroll All 1's</label>
-				    </p>
-				    <p>
-				      <input name="secondSaveBoolradio" ng-model="secondSaveBool" type="radio" id="secondSaveYes" ng-value="true"/>
-				      <label for="secondSaveYes">Another Save</label>
-				      <input name="secondSaveBoolradio" ng-model="secondSaveBool" type="radio" id="secondSaveNo" ng-value="false"/>
-				      <label for="secondSaveNo">No Second Save</label>
-				    </p>
-				  </form>
-				  <h4>Success: {{firstSaveSuccesses}}</h4>
-				</div>
-			</div> <!-- first save ng-if -->
-		</div> <!-- row for the first save -->
-		
-		<!-- Second save -->
+		<!-- Data for the first Save -->
 		<div class="row">
-			<div ng-show="secondSaveBool">
+			<div ng-show="successesVsVehicle || successesVsInfantry">
 				<div class="col s4 offset-s4 center-align">
-					<input type="text" name="secondSaveVal" ng-model="secondSave" placeholder="Second Save Target">
-					<form  action="#">
+					<input type="text" name="firstSaveVal" ng-model="firstSave" placeholder="First Save Target">
+				<form  action="#">
 					<p>
-						<input name="rerollsecondsave" ng-model="rerollAllSave2" type="radio" id="rerollAllSave2" ng-value="true"/>
-			      <label for="rerollAllSave2">Reroll All</label>
-			      <input name="rerollsecondsave" ng-model="rerollAllSave2" type="radio" id="RerollAllSave2No" ng-value="false"/>
-			      <label for="RerollAllSave2No">No Reroll All</label>
-					</p>
-					<p>
-			     	<input name="reroll1ssecondsave" ng-model="reroll1sSave2" type="radio" id="reroll1sSave2" ng-value="true"/>
-			      <label for="reroll1sSave2">Reroll 1's</label>
-			      <input name="rerollsecondsave" ng-model="reroll1sSave2" type="radio" id="noReroll1sSave2No" ng-value="false"/>
-			      <label for="noReroll1sSave2No">No Reroll 1's</label>
+			      <input name="group1110999" ng-model="rerollAllSave1" type="radio" id="rerollAllSave1" ng-value="true"/>
+			      <label for="rerollAllSave1">Reroll All</label>
+			      <input name="group1110999" ng-model="rerollAllSave1" type="radio" id="noRerollAllSave1No" ng-value="false"/>
+			      <label for="noRerollAllSave1No">No Reroll All</label>
 			    </p>
-					</form>
-					<h4>Success: {{secondSaveSuccesses}}</h4>
-				</div>
-			</div> <!-- ng show for second save -->
-		</div> <!-- row class for second save -->
+					<p>
+			      <input name="group1110989" ng-model="rerollOnesSave1" type="radio" id="rerollOnesSave1" ng-value="true"/>
+			      <label for="rerollOnesSave1">Reroll All 1's</label>
+			      <input name="group1110989" ng-model="rerollOnesSave1" type="radio" id="noRerollOnesSave1No" ng-value="false"/>
+			      <label for="noRerollOnesSave1No">No Reroll All 1's</label>
+			    </p>
+			    <p>
+			      <input name="secondSaveBoolradio" ng-model="secondSaveBool" type="radio" id="secondSaveYes" ng-value="true"/>
+			      <label for="secondSaveYes">Another Save</label>
+			      <input name="secondSaveBoolradio" ng-model="secondSaveBool" type="radio" id="secondSaveNo" ng-value="false"/>
+			      <label for="secondSaveNo">No Second Save</label>
+			    </p>
+			  </form>
+			  <h4>Success: {{firstSaveSuccesses}}</h4>
+			</div>
+		</div> <!-- first save ng-if -->
+	</div> <!-- row for the first save -->
+	
+	<!-- Second save -->
+	<div class="row">
+		<div ng-show="secondSaveBool">
+			<div class="col s4 offset-s4 center-align">
+				<input type="text" name="secondSaveVal" ng-model="secondSave" placeholder="Second Save Target">
+				<form  action="#">
+				<p>
+					<input name="rerollsecondsave" ng-model="rerollAllSave2" type="radio" id="rerollAllSave2" ng-value="true"/>
+		      <label for="rerollAllSave2">Reroll All</label>
+		      <input name="rerollsecondsave" ng-model="rerollAllSave2" type="radio" id="RerollAllSave2No" ng-value="false"/>
+		      <label for="RerollAllSave2No">No Reroll All</label>
+				</p>
+				<p>
+		     	<input name="reroll1ssecondsave" ng-model="reroll1sSave2" type="radio" id="reroll1sSave2" ng-value="true"/>
+		      <label for="reroll1sSave2">Reroll 1's</label>
+		      <input name="rerollsecondsave" ng-model="reroll1sSave2" type="radio" id="noReroll1sSave2No" ng-value="false"/>
+		      <label for="noReroll1sSave2No">No Reroll 1's</label>
+		    </p>
+				</form>
+				<h4>Success: {{secondSaveSuccesses}}</h4>
+			</div>
+		</div> <!-- ng show for second save -->
+	</div> <!-- row class for second save -->
+
+	<!-- Comments and save -->
+	<div class="row">
+		<div class="col s6 offset-s3 center-align">
+			<input type="text" name="title" ng-model="calcTitle" placeholder="Title">
+			<textarea name="notes" ng-model="note" placeholder="Enter notes and comments here..."></textarea>
+			<input type="text" name="tag" ng-model="tags" placeholder="Comma Seperated Tags">
+			<a class="waves-effect waves-light btn">Save Calculation</a>
+		</div>
+	</div>
 </div> <!-- container div -->
