@@ -31,7 +31,6 @@ app.controller("calcCTRL", function ($scope, $route, dataFactory, objectService)
 //this function determines that attack type
 //this starts the calculation sequence
 	$scope.attackSequenceType = function() {
-		console.log("called attackSequenceType" );
 		if($scope.shootingBool){
 			toHitCalculator(shootingAttack($scope.ballisticSkill, $scope.numOfDiceShooting));
 		} else {
@@ -206,5 +205,95 @@ app.controller("calcCTRL", function ($scope, $route, dataFactory, objectService)
 	}
 /////*** To Wound Function***\\\\\
 
+	// wound object
+	// this.successfulHits = hits;
+	// this.toughness = 0;
+	// this.weaponStrength = 0; //1-10 is legal
+	// this.rerollOnes = false;
+	// this.rerollAll = false;
+	// this.rerollSingle = false;
+	// this.autoWoundOnX = false;
+	// this.xForAutowound = null;
+	// this.successes = 0;
+	// this.calcID = null;
+	var woundObjectFinal = {};
+	var armorPenFinal = {};
+
+	$scope.damageSequenceType = function() {
+		if($scope.infantryBool){
+			var woundObject = new objectService.ToWound(toHitObject.successes);
+			woundObjectFinal = toWoundCalculator(woundObject);
+			console.log(woundObjectFinal);
+		} else {
+
+		}
+	};
+
+	function toWoundCalculator(woundObject) {
+		let strength = $scope.weaponStrength;
+		let toughness = $scope.defenderToughness;
+		woundObject.weaponStrength = strength;
+		woundObject.toughness = toughness;
+
+		const woundThresholdArray = [ //10x10 array [str][tough]
+		[4,5,6,6,null,null,null,null,null,null],
+		[3,4,5,6,6,null,null,null,null,null],
+		[2,3,4,5,6,6,null,null,null,null],
+		[2,2,3,4,5,6,6,null,null,null],
+		[2,2,2,3,4,5,6,6,null,null,],
+		[2,2,2,2,3,4,5,6,6,null],
+		[2,2,2,2,2,3,4,5,6,6],
+		[2,2,2,2,2,2,3,4,5,6],
+		[2,2,2,2,2,2,2,3,4,5],
+		[2,2,2,2,2,2,2,2,3,4]];
+
+		let woundTarget = woundThresholdArray[strength - 1][toughness - 1];
+
+		console.log("wound target", woundTarget );
+		//auto wounding
+		if($scope.autoWoundOnX) {
+			let targetX = $scope.autoWoundVal;
+			woundObject.autoWoundOnX = true;
+			woundObject.xForAutowound = targetX;
+			woundObject.successes = woundObject.successfulHits * ((7 - targetX)/6.0);
+			printWoundSuccesses(woundObject);
+			return woundObject;	
+		}
+		//reroll all
+		if($scope.rerollAllWound){
+			woundObject.rerollAll = true;
+			woundObject.successes = woundObject.successfulHits * (((7 - woundTarget)/6.0) + ((1 * (woundTarget - 1)/6.0) * (7 - woundTarget)/6.0));
+			printWoundSuccesses(woundObject);
+			return woundObject;	
+		}
+		//reroll 1's 
+		if($scope.rerollOnesWound){
+			woundObject.rerollOnes = true;
+			woundObject.successes = woundObject.successfulHits * (((7 - woundTarget)/6.0) + ((1 * (1.0)/6.0) * (7 - woundTarget)/6.0));
+			printWoundSuccesses(woundObject);
+			return woundObject;	
+		}
+		//reroll poison
+		//reroll poison 1's
+		//normal wounding
+		if(woundTarget === null){
+			$scope.successesVsInfantry = 0.0;
+			woundObject.successes = 0;
+			return woundObject;
+		} else {
+			woundObject.successes = woundObject.successfulHits * ((7 - woundTarget)/6.0);
+			printWoundSuccesses(woundObject);
+			return woundObject;
+		}
+	}
 	
+	function printWoundSuccesses(woundObject){
+		if(woundObject){
+			$scope.successesVsInfantry = woundObject.successes.toFixed(2);
+		} else {
+			
+		}
+	}
+
+
 });

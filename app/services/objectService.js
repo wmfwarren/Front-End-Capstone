@@ -34,7 +34,7 @@ app.service("objectService", function(){
 		this.rerollAll = false;
 		this.rerollSingle = false;
 		this.autoWoundOnX = false;
-		this.xForAutowound = 7;
+		this.xForAutowound = null;
 		this.successes = 0;
 		this.calcID = null;
 	};

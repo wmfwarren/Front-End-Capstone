@@ -96,8 +96,8 @@
 	 			</form>
 			</div> <!-- armor or infantry selection div -->
 			<div class="col s10 offset-s1 center-align" ng-show="infantryBool">
-				<input type="text" name="wepStrength" ng-model="weaponStrength" placeholder="Weapon Strength">
-				<input type="text" name="toughness" ng-model="defenderToughness" placeholder="Defender Toughness">
+				<input type="number" name="wepStrength" ng-model="weaponStrength" ng-required="number" min="1" max="10" placeholder="Weapon Strength">
+				<input type="number" name="toughness" ng-model="defenderToughness" ng-required="number" min="1" max="10" placeholder="Defender Toughness">
 				<form  action="#">
 				<p>
 		      <input name="group111" ng-model="rerollAllWound" type="radio" id="rerollAllInfantry" ng-value="true"/>
@@ -119,9 +119,10 @@
 		    </p>
 		    </form>
 		    <div class="col s4 offset-s4 center-align" ng-show="autoWoundOnX">
-		    	<input type="text" name="autoWoundVal" ng-model="autoWoundVal" placeholder="Auto Wound Value">
+		    	<input type="number" name="autoWoundVal" ng-model="autoWoundVal" ng-required="number" min="1" max="10"  placeholder="Auto Wound Value">
 		    </div>
 		    <h4>Success: {{successesVsInfantry}}</h4>
+		    <a class="waves-effect waves-light btn" ng-click="damageSequenceType()">Calculate Wounds</a>
 			</div> <!-- for infantry -->
 			<!-- Below is for vehicles -->
 			<div class="center-align col s10 offset-s1" ng-show="!infantryBool">
