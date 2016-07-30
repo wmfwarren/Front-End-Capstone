@@ -27,24 +27,19 @@ app.controller("calcCTRL", function ($scope, $route, dataFactory, objectService)
 	$scope.rerollAllSave2 = false;
 	$scope.reroll1sSave2 = false;
 	//these are testing vars
-	$scope.successesShooting = 1;
-	$scope.successesVsInfantry = 1;
-	$scope.firstSaveSuccesses = 1;
 
 //this function determines that attack type
 //this starts the calculation sequence
 	$scope.attackSequenceType = function() {
 		console.log("called attackSequenceType" );
 		if($scope.shootingBool){
-			console.log("shooting type");
 			toHitCalculator(shootingAttack($scope.ballisticSkill, $scope.numOfDiceShooting));
 		} else {
-			console.log("close combat type");
 			toHitCalculator(closeCombatAttack($scope.attackerWepSkill,
 			 $scope.defenderWepSkill,
 			 $scope.numOfDiceCloseCombat));
 		}
-	}
+	};
 /////*** To hit value and successes calculators***\\\\\
 //shooting to hit value calculator
 
@@ -55,12 +50,12 @@ app.controller("calcCTRL", function ($scope, $route, dataFactory, objectService)
 		//X this.attackerWepSkill = null; //1-10 is legal; 
 		//X this.defenderWepSkill = null; //1-10 is legal; 
 		//X this.numOfDice = null;
-		// this.successes = 0;
-		// this.rerollOnes = false;
-		// this.rerollAll = false;
-		// this.rerollSingle = false;
-		// this.rerollTarget = null;
-		// this.autoHit = false;
+		//X this.successes = 0;
+		//X this.rerollOnes = false;
+		//X this.rerollAll = false;
+		//X this.rerollSingle = false;
+		//X this.rerollTarget = null;
+		//X this.autoHit = false;
 		// this.calcID = null;
 
 	function shootingAttack(BSkill, dice) {
@@ -146,36 +141,70 @@ app.controller("calcCTRL", function ($scope, $route, dataFactory, objectService)
 	}
 
 	function toHitCalculator(attackReturnObject) {
+
+		let hitTarget = attackReturnObject.hitTarget;
+
+		//if auto hit do no math
 		if(attackReturnObject.autoHit) {
+			toHitObject.autoHit = true;
 			if(toHitObject.shootingAttack){
 				toHitObject.successes = toHitObject.numOfDice;
-				$scope.successesShooting = (100 * toHitObject.numOfDice).toFixed(2);
+				$scope.successesShooting = toHitObject.numOfDice.toFixed(2);
 				return;
 			} else {
 				toHitObject.successes = toHitObject.numOfDice;
-				$scope.successesCloseCombat = (100 * toHitObject.numOfDice).toFixed(2);
+				$scope.successesCloseCombat = toHitObject.numOfDice.toFixed(2);
 				return;
 			}
-			console.log("hit Object", toHitObject);
 		}
+		//rerolls for BS > 10 on shooting attacks
 		if(toHitObject.shootingAttack && attackReturnObject.rerollTarget){
-			// console.log("hit object at BS > 10", toHitObject);
-			let hitTarget = attackReturnObject.hitTarget;
 			let rerollTarget = attackReturnObject.rerollTarget;
-			// console.log("dice", toHitObject.numOfDice);
-			// console.log("hit target should be 5", attackReturnObject.hitTarget );
-			// console.log("rerollTarget", attackReturnObject.rerollTarget);
+			toHitObject.rerollTarget = rerollTarget;
 			toHitObject.successes = toHitObject.numOfDice * (((attackReturnObject.hitTarget)/6.0) + ((1 * (1)/6.0) * (7 - attackReturnObject.rerollTarget)/6.0));
-			$scope.successesShooting = (100 * toHitObject.successes).toFixed(2);
+			printHitSuccesses();
 			return;
 		}
-		if(rerollAllClose || rerollShooting) {
-			
-		}
+		//this rerolls all misses
+		if($scope.rerollAllClose || $scope.rerollAllShooting) {
+			toHitObject.rerollAll = true;
+			if(toHitObject.shootingAttack){
+				toHitObject.successes = toHitObject.numOfDice * (((7 - attackReturnObject.hitTarget)/6.0) + ((1 * (attackReturnObject.hitTarget - 1)/6.0) * (7 - attackReturnObject.hitTarget)/6.0));
+			} else {
 
-		let hitTarget = attackReturnObject.hitTarget;
+			}
+			printHitSuccesses();
+			return;
+		}
+		//this rerolls all 1s
+		if($scope.rerollOnesClose || $scope.rerollOnesShooting) {
+			toHitObject.rerollOnes = true;
+			toHitObject.successes = toHitObject.numOfDice * (((7 - attackReturnObject.hitTarget)/6.0) + ((1 * (1.0)/6.0) * (7 - attackReturnObject.hitTarget)/6.0));
+			printHitSuccesses();
+			return;
+		}
+		//add reroll a single miss
+		if($scope.rerollSingleClose || $scope.rerollSingleShooting) {
+			toHitObject.rerollSingle = true;
+			toHitObject.successes = (toHitObject.numOfDice * ((7 - attackReturnObject.hitTarget)/6.0)) + ((1 * (attackReturnObject.hitTarget - 1)/6.0) * (7 - attackReturnObject.hitTarget)/6.0);
+			printHitSuccesses();
+			return;
+		}
+		//this is the default normal hit functionality
 		toHitObject.successes = toHitObject.numOfDice * ((7 - attackReturnObject.hitTarget)/6.0);
-		$scope.successesShooting = (100 * toHitObject.successes).toFixed(2);
+		printHitSuccesses();		
 		return;
+	} //end of to hit function
+
+	// this function prints the successes of hit f(x) to DOM
+	function printHitSuccesses(){
+		if(toHitObject.shootingAttack){
+			$scope.successesShooting = toHitObject.successes.toFixed(2);
+		} else {
+			$scope.successesCloseCombat = toHitObject.successes.toFixed(2);
+		}
 	}
+/////*** To Wound Function***\\\\\
+
+	
 });

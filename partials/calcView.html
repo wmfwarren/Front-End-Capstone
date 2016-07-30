@@ -15,8 +15,8 @@
 
 	<div class="row">
 	 	<div class="center-align col s10 offset-s1" ng-show="shootingBool">
-	 		<input type="text" ng-model="numOfDiceShooting" name="numOfDice" placeholder="Number of dice rolled">
-	 		<input type="text" ng-model="ballisticSkill" name="balSkill" placeholder="Ballistic Skill of Shooter">
+	 		<input type="number" ng-model="numOfDiceShooting" ng-required="number" min="1" name="numOfDice" placeholder="Number of dice rolled" required>
+	 		<input type="number" ng-model="ballisticSkill" ng-required="number" min="1" max="10" name="balSkill" placeholder="Ballistic Skill of Shooter" required>
 	 		<form action="#">
 	      <p>
 		      <input name="group2" ng-model="rerollAllShooting" type="radio" id="rerollAll" ng-value="true"/>
@@ -47,9 +47,9 @@
 	 		<h4>Success: {{successesShooting}}</h4>
 	 	</div>
 	 	<div class="center-align col s10 offset-s1" ng-show="!shootingBool">
-	 		<input ng-model="numOfDiceCloseCombat" name="numOfDice" type="text" placeholder="Number of dice rolled">
-	 		<input ng-model="attackerWepSkill" type="text" name="atkWS" placeholder="Weapon Skill of Attacker">
-	 		<input ng-model="defenderWepSkill" type="text" name="defWS" placeholder="Weapon Skill of Defender">
+	 		<input ng-model="numOfDiceCloseCombat" ng-required="number" name="numOfDice" type="number" min="1" placeholder="Number of dice rolled" required>
+	 		<input ng-model="attackerWepSkill" ng-required="number" type="number" min="1" max="10" name="atkWS" placeholder="Weapon Skill of Attacker" required>
+	 		<input ng-model="defenderWepSkill" ng-required="number" type="number" min="1" max="10" name="defWS" placeholder="Weapon Skill of Defender" required>
 	 		<form action="#">
 	 			<p>
 		      <input name="rerollAllClose" ng-model="rerollAllClose" type="radio" id="rerollAllClose" ng-value="true"/>
@@ -64,9 +64,9 @@
 					<label for="rerollOnesCloseNo">No Reroll 1's</label> 
 		    </p>
 		    <p>
-		      <input name="rerollSingleClose" ng-model="rerollOnesClose" type="radio" id="rerollSingleClose" ng-value="true"/>
+		      <input name="rerollSingleClose" ng-model="rerollSingleClose" type="radio" id="rerollSingleClose" ng-value="true"/>
 		      <label for="rerollSingleClose">Reroll 1 die</label>
-		      <input name="rerollSingleClose" ng-model="rerollOnesClose" type="radio" id="rerollSingleCloseNo" ng-value="false"/>
+		      <input name="rerollSingleClose" ng-model="rerollSingleClose" type="radio" id="rerollSingleCloseNo" ng-value="false"/>
 		      <label for="rerollSingleCloseNo">Do Not Reroll 1 die</label>
 		    </p>
 		    <p>
