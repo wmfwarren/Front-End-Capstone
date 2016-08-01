@@ -217,7 +217,7 @@ app.controller("calcCTRL", function ($scope, $route, dataFactory, objectService)
 	// this.successes = 0;
 	// this.calcID = null;
 	var woundObjectFinal = {};
-	var armorPenFinal = {};
+	var armorPenObjectFinal = {};
 
 	$scope.damageSequenceType = function() {
 		if($scope.infantryBool){
@@ -225,7 +225,9 @@ app.controller("calcCTRL", function ($scope, $route, dataFactory, objectService)
 			woundObjectFinal = toWoundCalculator(woundObject);
 			console.log(woundObjectFinal);
 		} else {
-
+			var armorPenObject = new objectService.ArmorPen(toHitObject.successes);
+			armorPenObjectFinal = armorPenCalculator(armorPenObject);
+			console.log("armorPenObject", armorPenObjectFinal);
 		}
 	};
 
@@ -306,13 +308,76 @@ app.controller("calcCTRL", function ($scope, $route, dataFactory, objectService)
 			} //end to wound else statement
 	} //end to wound function
 	
-	function printWoundSuccesses(woundObject){
-		if(woundObject){
-			$scope.successesVsInfantry = woundObject.successes.toFixed(2);
-		} else { //this else prints APen
-			
-		}
-	} //end wound print function
+	// armor pen obj
+	// this.name = "ArmorPen";
+	// this.successfulHits = hits;
+	// this.dicePerHit = 0;
+	// this.successes = 0;
+	// this.armorVal = null; //10-15 is legal
+	// this.weaponStrength = 0; //1-10 is legal
+	// this.rerollAll = false;
+	// this.calcID = null;
 
-	
-});
+	function armorPenCalculator(penObject){
+		let strength = $scope.weaponStrength;
+		let armorValue = $scope.armorValue;
+		penObject.dicePerHit = $scope.numOfAPDice;
+		penObject.weaponStrength = strength;
+		penObject.armorVal = armorValue;
+		let numOfHits = penObject.successfulHits;
+		let glanceTarget = armorValue - strength;
+		let penTarget = glanceTarget + 1;
+
+		let percentOverArray3D6 = [1.0,1.0,1.0,1.0,.9953,.9814,.9537,.9074,.8379,.7407,.6250,.5,.3750,.2592,.1620,.0925,.0462,.0185,.0046];
+		let percentOverArray2D6 = [1.0,1.0,1.0,.9722,.9166,.8333,.7222,.5833,.4166,.2777,.1666,.0833,.0277];
+		let percentOverArray1D6 = [1.0,.8333,.6667,.5000,.3333,.1667];
+
+		if(penObject.dicePerHit === 3 ){
+			penObject.successes = numOfHits * percentOverArray3D6[glanceTarget];
+		} else if (penObject.dicePerHit === 2){
+			if(glanceTarget > 12){
+				penObject.successes = 0;
+			} else {
+				penObject.successes = numOfHits * percentOverArray2D6[glanceTarget];
+			}
+		} else {
+			if (glanceTarget > 6) {
+				penObject.successes = 0;
+			} else {
+				penObject.successes = numOfHits * percentOverArray1D6[glanceTarget];
+			}
+		}
+		printWoundSuccesses(penObject);
+		return penObject;
+	} //end armor pen function
+
+	function printWoundSuccesses(object){
+		if(object.name === "ToWound"){
+			$scope.successesVsInfantry = object.successes.toFixed(2);
+		} else { //this else prints APen
+			$scope.successesVsVehicle = object.successes.toFixed(2);
+		}
+	} //end wound/AP print function
+/////*** Saves Functionality***\\\\\
+		// this.name = "FirstSave";
+		// this.successfulWounds = wounds;
+		// this.saveBool = getSave; //true of false
+		// this.successes = 0;
+		// this.target = 0; //2-6 are legal
+		// this.calcID = null;
+	$scope.callFirstSave = function(){
+		//call with the right vehicle or infantry input.
+		if($scope.infantryBool){
+			//call save calc with the infantry successes
+		} else {
+			//call save calc with the vehicle successes
+		}
+	}; //end first save call
+
+	function saveCalculator(object) {
+		//reroll all
+		//reroll 1's
+		//standard
+		//set bool if not set
+	}
+}); //closing controller
