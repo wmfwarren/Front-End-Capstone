@@ -250,50 +250,69 @@ app.controller("calcCTRL", function ($scope, $route, dataFactory, objectService)
 		let woundTarget = woundThresholdArray[strength - 1][toughness - 1];
 
 		console.log("wound target", woundTarget );
-		//auto wounding
-		if($scope.autoWoundOnX) {
-			let targetX = $scope.autoWoundVal;
-			woundObject.autoWoundOnX = true;
-			woundObject.xForAutowound = targetX;
-			woundObject.successes = woundObject.successfulHits * ((7 - targetX)/6.0);
-			printWoundSuccesses(woundObject);
-			return woundObject;	
-		}
-		//reroll all
-		if($scope.rerollAllWound){
-			woundObject.rerollAll = true;
-			woundObject.successes = woundObject.successfulHits * (((7 - woundTarget)/6.0) + ((1 * (woundTarget - 1)/6.0) * (7 - woundTarget)/6.0));
-			printWoundSuccesses(woundObject);
-			return woundObject;	
-		}
-		//reroll 1's 
-		if($scope.rerollOnesWound){
-			woundObject.rerollOnes = true;
-			woundObject.successes = woundObject.successfulHits * (((7 - woundTarget)/6.0) + ((1 * (1.0)/6.0) * (7 - woundTarget)/6.0));
-			printWoundSuccesses(woundObject);
-			return woundObject;	
-		}
-		//reroll poison
-		//reroll poison 1's
-		//normal wounding
-		if(woundTarget === null){
+
+		if(woundTarget === null){ //if target is null then the defender cant be wounded
 			$scope.successesVsInfantry = 0.0;
 			woundObject.successes = 0;
 			return woundObject;
-		} else {
-			woundObject.successes = woundObject.successfulHits * ((7 - woundTarget)/6.0);
-			printWoundSuccesses(woundObject);
-			return woundObject;
-		}
-	}
+		} else { //otherwise calculate wounds
+			//reroll poison
+			if ($scope.autoWoundOnX && $scope.rerollAllWound) {
+				let targetX = $scope.autoWoundVal;
+				woundObject.autoWoundOnX = true;
+				woundObject.xForAutowound = targetX;
+				woundObject.rerollAll = true;
+				woundObject.successes = woundObject.successfulHits * (((7 - targetX)/6.0) + ((1 * (targetX - 1)/6.0) * (7 - targetX)/6.0));
+				printWoundSuccesses(woundObject);
+				return woundObject;
+			}
+			//reroll poison 1's
+			if ($scope.autoWoundOnX && $scope.rerollOnesWound) {
+				let targetX = $scope.autoWoundVal;
+				woundObject.autoWoundOnX = true;
+				woundObject.xForAutowound = targetX;
+				woundObject.rerollOnes = true;
+				woundObject.successes = woundObject.successfulHits * (((7 - targetX)/6.0) + ((1 * (1.0)/6.0) * (7 - targetX)/6.0));
+				printWoundSuccesses(woundObject);
+				return woundObject;
+			}
+			//auto wounding
+			if($scope.autoWoundOnX) {
+				let targetX = $scope.autoWoundVal;
+				woundObject.autoWoundOnX = true;
+				woundObject.xForAutowound = targetX;
+				woundObject.successes = woundObject.successfulHits * ((7 - targetX)/6.0);
+				printWoundSuccesses(woundObject);
+				return woundObject;	
+			}
+			//reroll all
+			if($scope.rerollAllWound){
+				woundObject.rerollAll = true;
+				woundObject.successes = woundObject.successfulHits * (((7 - woundTarget)/6.0) + ((1 * (woundTarget - 1)/6.0) * (7 - woundTarget)/6.0));
+				printWoundSuccesses(woundObject);
+				return woundObject;	
+			}
+			//reroll 1's 
+			if($scope.rerollOnesWound){
+				woundObject.rerollOnes = true;
+				woundObject.successes = woundObject.successfulHits * (((7 - woundTarget)/6.0) + ((1 * (1.0)/6.0) * (7 - woundTarget)/6.0));
+				printWoundSuccesses(woundObject);
+				return woundObject;	
+			}
+			//normal wounding
+				woundObject.successes = woundObject.successfulHits * ((7 - woundTarget)/6.0);
+				printWoundSuccesses(woundObject);
+				return woundObject;
+			} //end to wound else statement
+	} //end to wound function
 	
 	function printWoundSuccesses(woundObject){
 		if(woundObject){
 			$scope.successesVsInfantry = woundObject.successes.toFixed(2);
-		} else {
+		} else { //this else prints APen
 			
 		}
-	}
+	} //end wound print function
 
-
+	
 });
