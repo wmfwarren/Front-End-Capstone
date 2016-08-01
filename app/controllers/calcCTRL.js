@@ -382,10 +382,28 @@ app.controller("calcCTRL", function ($scope, $route, dataFactory, objectService)
 	}; //end first save call
 
 	function saveCalculator(saveObject) {
+		let saveTarget = $scope.firstSave;
+		saveObject.target = saveTarget;
+		let savesToRoll = saveObject.successfulWounds;
+
 		//reroll all
+		if ($scope.rerollAllSave1){
+		saveObject.successes = savesToRoll * (((7 - saveTarget)/6.0) + ((1 * (saveTarget - 1)/6.0) * (7 - saveTarget)/6.0));
+		saveObject.rerollAll = true;
+		console.log("save reroll", saveObject);
+		return saveObject;
+		} 
 		//reroll 1's
+		if ($scope.rerollOnesSave1){
+			saveObject.successes = savesToRoll * (((7 - saveTarget)/6.0) + ((1 * 1.0/6.0) * (7 - saveTarget)/6.0));
+			saveObject.rerollAll = true;
+			console.log("save reroll 1s", saveObject);
+			return saveObject;
+		}
 		//standard
 		//set bool if not set
+		saveObject.successes = savesToRoll * ((7 - saveTarget)/6.0);
+		console.log("save normal", saveObject);
 		return saveObject;
 	}
 }); //closing controller

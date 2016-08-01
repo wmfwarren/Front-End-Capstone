@@ -148,7 +148,7 @@
 		<div class="row">
 			<div ng-show="successesVsVehicle || successesVsInfantry">
 				<div class="col s4 offset-s4 center-align">
-					<input type="text" name="firstSaveVal" ng-model="firstSave" placeholder="First Save Target">
+					<input type="number" name="firstSaveVal" ng-model="firstSave" ng-required="number" min="2" max="6" placeholder="First Save Target">
 				<form  action="#">
 					<p>
 			      <input name="group1110999" ng-model="rerollAllSave1" type="radio" id="rerollAllSave1" ng-value="true"/>

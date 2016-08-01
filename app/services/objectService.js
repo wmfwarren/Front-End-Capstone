@@ -15,7 +15,7 @@ app.service("objectService", function(){
 	this.ToHit = function(){
 		this.name = "ToHit";
 		this.shootingAttack = null; //boolean
-		this.ballisticSkill = 0; //1-10 is legal; 0 is a assault attack
+		this.ballisticSkill = 0; //1-10 is legal; 0 is an assault attack
 		this.attackerWepSkill = 0; //1-10 is legal; 0 is shooting
 		this.defenderWepSkill = 0; //1-10 is legal; 0 is shooting
 		this.numOfDice = null;
@@ -58,6 +58,8 @@ app.service("objectService", function(){
 		this.successfulWounds = wounds;
 		this.saveBool = null; //true or false
 		this.successes = 0;
+		this.rerollOnes = false;
+		this.rerollAll = false;
 		this.target = 0; //2-6 are legal
 		this.calcID = null;
 	};
@@ -67,6 +69,8 @@ app.service("objectService", function(){
 		this.successfulWounds = unsavedWounds;
 		this.saveBool = getsSave; //true of false
 		this.successes = 0;
+		this.rerollOnes = false;
+		this.rerollAll = false;
 		this.target = 0; //2-6 are legal
 		this.calcID = null;
 	};
