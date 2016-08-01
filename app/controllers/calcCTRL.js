@@ -365,19 +365,27 @@ app.controller("calcCTRL", function ($scope, $route, dataFactory, objectService)
 		// this.successes = 0;
 		// this.target = 0; //2-6 are legal
 		// this.calcID = null;
+
+		var firstSaveFinal = {};
+
 	$scope.callFirstSave = function(){
 		//call with the right vehicle or infantry input.
 		if($scope.infantryBool){
 			//call save calc with the infantry successes
+			let firstSaveObject = new objectService.FirstSave(woundObjectFinal.successes);
+			firstSaveFinal = saveCalculator(firstSaveObject);
 		} else {
 			//call save calc with the vehicle successes
+			let firstSaveObject = new objectService.FirstSave(armorPenObjectFinal.successes);
+			firstSaveFinal = saveCalculator(firstSaveObject);
 		}
 	}; //end first save call
 
-	function saveCalculator(object) {
+	function saveCalculator(saveObject) {
 		//reroll all
 		//reroll 1's
 		//standard
 		//set bool if not set
+		return saveObject;
 	}
 }); //closing controller

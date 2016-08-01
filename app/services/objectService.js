@@ -53,10 +53,10 @@ app.service("objectService", function(){
 		this.calcID = null;
 	};
 
-	this.FirstSave = function(wounds, getsSave){
+	this.FirstSave = function(wounds){
 		this.name = "FirstSave";
 		this.successfulWounds = wounds;
-		this.saveBool = getSave; //true of false
+		this.saveBool = null; //true or false
 		this.successes = 0;
 		this.target = 0; //2-6 are legal
 		this.calcID = null;

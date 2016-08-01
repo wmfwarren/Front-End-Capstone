@@ -169,7 +169,8 @@
 			      <label for="secondSaveNo">No Second Save</label>
 			    </p>
 			  </form>
-			  <h4>Success: {{firstSaveSuccesses}}</h4>
+			  <a class="waves-effect waves-light btn" ng-click="callFirstSave()">Apply Save</a>
+			  <h4>Successful Wounds: {{firstSaveSuccesses}}</h4>
 			</div>
 		</div> <!-- first save ng-if -->
 	</div> <!-- row for the first save -->
@@ -193,7 +194,7 @@
 		      <label for="noReroll1sSave2No">No Reroll 1's</label>
 		    </p>
 				</form>
-				<h4>Success: {{secondSaveSuccesses}}</h4>
+				<h4>Successful Wounds: {{secondSaveSuccesses}}</h4>
 			</div>
 		</div> <!-- ng show for second save -->
 	</div> <!-- row class for second save -->
