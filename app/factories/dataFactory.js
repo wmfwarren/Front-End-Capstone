@@ -39,5 +39,34 @@ app.factory("dataFactory", function($q, $http, firebaseURL) {
     });
   };
 
-return {currentCalcId, postNewCalculation, putCalculation};
+  const getUserMetaData = function(uid) {
+  	console.log("Getting user ", uid);
+  	return $q((resolve, reject) => {
+      $http.get(`${firebaseURL}/MetaData.json/?orderBy="uid"&equalTo="${uid}"`)
+        .success((dataObject) => {
+          
+          resolve(dataObject);
+        })
+        .error((error) => {
+          reject(error);
+        });
+    });
+  };
+
+  const deleteData = function(ID, name){
+		return $q((resolve, reject) => {
+      $http.delete(
+        `${firebaseURL}/${name}/${ID}.json`
+      	)
+        .success((data) => {
+          // console.log("Data from delete", data );
+          resolve(data);
+        })
+        .error((error) => {
+          reject(error);
+        });
+    });
+  };
+
+return {currentCalcId, postNewCalculation, putCalculation, getUserMetaData, deleteData};
 })

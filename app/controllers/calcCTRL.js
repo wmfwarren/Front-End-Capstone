@@ -1,6 +1,6 @@
 "use strict";
 
-app.controller("calcCTRL", function ($scope, $route, dataFactory, objectService) {
+app.controller("calcCTRL", function ($scope, $route, dataFactory, authFactory, objectService) {
 	$scope.shootingBool = true;
 	$scope.infantryBool = true;
 	//To hit
@@ -431,6 +431,7 @@ app.controller("calcCTRL", function ($scope, $route, dataFactory, objectService)
 		metaData.title = $scope.calcTitle;
 		metaData.comment = $scope.note;
 		metaData.tags = formatTags($scope.tags);
+		metaData.uid = authFactory.getUser();
 
 		dataFactory.postNewCalculation(metaData)
 		.then((response) => {
