@@ -324,9 +324,9 @@ app.controller("calcCTRL", function ($scope, $route, dataFactory, objectService)
 		let glanceTarget = armorValue - strength;
 		let penTarget = glanceTarget + 1;
 
-		let percentOverArray3D6 = [1.0,1.0,1.0,1.0,.9953,.9814,.9537,.9074,.8379,.7407,.6250,.5,.3750,.2592,.1620,.0925,.0462,.0185,.0046];
-		let percentOverArray2D6 = [1.0,1.0,1.0,.9722,.9166,.8333,.7222,.5833,.4166,.2777,.1666,.0833,.0277];
-		let percentOverArray1D6 = [1.0,.8333,.6667,.5000,.3333,.1667];
+		let percentOverArray3D6 = [1.0,1.0,1.0,1.0,0.9953,0.9814,0.9537,0.9074,0.8379,0.7407,0.6250,0.5,0.3750,0.2592,0.1620,0.0925,0.0462,0.0185,0.0046];
+		let percentOverArray2D6 = [1.0,1.0,1.0,0.9722,0.9166,0.8333,0.7222,0.5833,0.4166,0.2777,0.1666,0.0833,0.0277];
+		let percentOverArray1D6 = [1.0,0.8333,0.6667,0.5000,0.3333,0.1667];
 
 		if(penObject.dicePerHit === 3 ){
 			penObject.successes = numOfHits * percentOverArray3D6[glanceTarget];
@@ -436,11 +436,38 @@ app.controller("calcCTRL", function ($scope, $route, dataFactory, objectService)
 		.then((response) => {
 			let calcID = dataFactory.currentCalcId;
 			metaData.calcID = response.name;
+			toHitObject.calcID = response.name;
+			woundObjectFinal.calcID = response.name;
+			armorPenObjectFinal.calcID = response.name;
+			firstSaveFinal.calcID = response.name;
+			secondSaveFinal.calcID = response.name;
 			console.log("metaData", metaData);
 		})
 		.then((response) => {
 			dataFactory.putCalculation(metaData);
-		});
+		})
+		.then((response) => {
+			if($scope.successesShooting || $scope.successesCloseCombat) {
+				dataFactory.postNewCalculation(toHitObject);
+			}
+		})			
+		.then((response) => {
+			if($scope.infantryBool){
+				dataFactory.postNewCalculation(woundObjectFinal);
+			} else {
+				dataFactory.postNewCalculation(armorPenObjectFinal);
+			}
+		})			
+		.then((response) => {
+			if($scope.firstSaveSuccesses){
+				dataFactory.postNewCalculation(firstSaveFinal);
+			}
+		})			
+		.then((response) => {
+			if($scope.secondSaveSuccesses){
+				dataFactory.postNewCalculation(secondSaveFinal);
+			}
+		});		
 	};
 
 	function formatTags(tagString) {
