@@ -424,4 +424,28 @@ app.controller("calcCTRL", function ($scope, $route, dataFactory, objectService)
 			secondSaveFinal = saveCalculator(secondSaveObject);
 		}
 	}//end second save call
+/////***Save data functions***\\\\\
+	$scope.postNewCalc = function() {
+		let metaData = new objectService.MetaData();
+
+		metaData.title = $scope.calcTitle;
+		metaData.comment = $scope.note;
+		metaData.tags = formatTags($scope.tags);
+
+		dataFactory.postNewCalculation(metaData)
+		.then((response) => {
+			let calcID = dataFactory.currentCalcId;
+			metaData.calcID = response.name;
+			console.log("metaData", metaData);
+		})
+		.then((response) => {
+			dataFactory.putCalculation(metaData);
+		});
+	};
+
+	function formatTags(tagString) {
+		tagString = tagString.replace(/\s/g, "");
+		let tagArray = tagString.split(/,/);
+		return tagArray;
+	}
 }); //closing controller
