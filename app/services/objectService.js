@@ -57,7 +57,7 @@ app.service("objectService", function(){
 		this.name = "FirstSave";
 		this.successfulWounds = wounds;
 		this.saveBool = null; //true or false
-		this.successes = 0;
+		this.successes = 0; //failed saves, successful wounds
 		this.rerollOnes = false;
 		this.rerollAll = false;
 		this.target = 0; //2-6 are legal
@@ -68,7 +68,7 @@ app.service("objectService", function(){
 		this.name = "SecondSave";
 		this.successfulWounds = unsavedWounds;
 		this.saveBool = getsSave; //true of false
-		this.successes = 0;
+		this.successes = 0; //failed saves, successful wounds
 		this.rerollOnes = false;
 		this.rerollAll = false;
 		this.target = 0; //2-6 are legal

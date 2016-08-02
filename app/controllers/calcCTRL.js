@@ -223,11 +223,9 @@ app.controller("calcCTRL", function ($scope, $route, dataFactory, objectService)
 		if($scope.infantryBool){
 			var woundObject = new objectService.ToWound(toHitObject.successes);
 			woundObjectFinal = toWoundCalculator(woundObject);
-			console.log(woundObjectFinal);
 		} else {
 			var armorPenObject = new objectService.ArmorPen(toHitObject.successes);
 			armorPenObjectFinal = armorPenCalculator(armorPenObject);
-			console.log("armorPenObject", armorPenObjectFinal);
 		}
 	};
 
@@ -250,8 +248,6 @@ app.controller("calcCTRL", function ($scope, $route, dataFactory, objectService)
 		[2,2,2,2,2,2,2,2,3,4]];
 
 		let woundTarget = woundThresholdArray[strength - 1][toughness - 1];
-
-		console.log("wound target", woundTarget );
 
 		if(woundTarget === null){ //if target is null then the defender cant be wounded
 			$scope.successesVsInfantry = 0.0;
@@ -366,7 +362,8 @@ app.controller("calcCTRL", function ($scope, $route, dataFactory, objectService)
 		// this.target = 0; //2-6 are legal
 		// this.calcID = null;
 
-		var firstSaveFinal = {};
+	var firstSaveFinal = {};
+	var secondSaveFinal = {};
 
 	$scope.callFirstSave = function(){
 		//call with the right vehicle or infantry input.
@@ -387,23 +384,44 @@ app.controller("calcCTRL", function ($scope, $route, dataFactory, objectService)
 		let savesToRoll = saveObject.successfulWounds;
 
 		//reroll all
-		if ($scope.rerollAllSave1){
-		saveObject.successes = savesToRoll * (((7 - saveTarget)/6.0) + ((1 * (saveTarget - 1)/6.0) * (7 - saveTarget)/6.0));
+		if (($scope.rerollAllSave1 && saveObject.name === "FirstSave") || ($scope.rerollAllSave2 && saveObject.name === "SecondSave")){
+		saveObject.successes = saveObject.successfulWounds - (savesToRoll * (((7 - saveTarget)/6.0) + ((1 * (saveTarget - 1)/6.0) * (7 - saveTarget)/6.0)));
 		saveObject.rerollAll = true;
-		console.log("save reroll", saveObject);
+		printSave(saveObject);
 		return saveObject;
 		} 
 		//reroll 1's
-		if ($scope.rerollOnesSave1){
-			saveObject.successes = savesToRoll * (((7 - saveTarget)/6.0) + ((1 * 1.0/6.0) * (7 - saveTarget)/6.0));
+		if (($scope.rerollOnesSave1 && saveObject.name === "FirstSave") || ($scope.reroll1sSave2 && saveObject.name === "SecondSave")){
+			saveObject.successes = saveObject.successfulWounds - (savesToRoll * (((7 - saveTarget)/6.0) + ((1 * 1.0/6.0) * (7 - saveTarget)/6.0)));
 			saveObject.rerollAll = true;
-			console.log("save reroll 1s", saveObject);
+			printSave(saveObject);
 			return saveObject;
 		}
 		//standard
 		//set bool if not set
-		saveObject.successes = savesToRoll * ((7 - saveTarget)/6.0);
-		console.log("save normal", saveObject);
+		saveObject.successes = saveObject.successfulWounds - (savesToRoll * ((7 - saveTarget)/6.0));
+		printSave(saveObject);
 		return saveObject;
 	}
+
+	function printSave(object) {
+		if(object.name === "SecondSave"){
+			$scope.secondSaveSuccesses = object.successes.toFixed(2);
+		} else {
+			$scope.firstSaveSuccesses = object.successes.toFixed(2);
+		}
+	}// end print save function
+	///*Second save*\\\
+	$scope.callSecondSave = function(){
+		//call with the right vehicle or infantry input.
+		if($scope.infantryBool){
+			//call save calc with the infantry successes
+			let secondSaveObject = new objectService.SecondSave(firstSaveFinal.successes, true);
+			secondSaveFinal = saveCalculator(secondSaveObject);
+		} else {
+			//call save calc with the vehicle successes
+			let secondSaveObject = new objectService.SecondSave(firstSaveFinal.successes, true);
+			secondSaveFinal = saveCalculator(secondSaveObject);
+		}
+	}//end second save call
 }); //closing controller

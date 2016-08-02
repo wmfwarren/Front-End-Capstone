@@ -182,18 +182,19 @@
 				<input type="text" name="secondSaveVal" ng-model="secondSave" placeholder="Second Save Target">
 				<form  action="#">
 				<p>
-					<input name="rerollsecondsave" ng-model="rerollAllSave2" type="radio" id="rerollAllSave2" ng-value="true"/>
+					<input name="rerollsecondsaveall" ng-model="rerollAllSave2" type="radio" id="rerollAllSave2" ng-value="true"/>
 		      <label for="rerollAllSave2">Reroll All</label>
-		      <input name="rerollsecondsave" ng-model="rerollAllSave2" type="radio" id="RerollAllSave2No" ng-value="false"/>
+		      <input name="rerollsecondsaveall" ng-model="rerollAllSave2" type="radio" id="rerollAllSave2No" ng-value="false"/>
 		      <label for="RerollAllSave2No">No Reroll All</label>
 				</p>
 				<p>
-		     	<input name="reroll1ssecondsave" ng-model="reroll1sSave2" type="radio" id="reroll1sSave2" ng-value="true"/>
+		     	<input name="reroll1ssecondsave1s" ng-model="reroll1sSave2" type="radio" id="reroll1sSave2" ng-value="true"/>
 		      <label for="reroll1sSave2">Reroll 1's</label>
-		      <input name="rerollsecondsave" ng-model="reroll1sSave2" type="radio" id="noReroll1sSave2No" ng-value="false"/>
+		      <input name="rerollsecondsave1s" ng-model="reroll1sSave2" type="radio" id="noReroll1sSave2No" ng-value="false"/>
 		      <label for="noReroll1sSave2No">No Reroll 1's</label>
 		    </p>
 				</form>
+				 <a class="waves-effect waves-light btn" ng-click="callSecondSave()">Apply Save</a>
 				<h4>Successful Wounds: {{secondSaveSuccesses}}</h4>
 			</div>
 		</div> <!-- ng show for second save -->
