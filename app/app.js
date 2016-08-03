@@ -18,5 +18,9 @@ app.config(function($routeProvider) {
 		templateUrl: "partials/calcView.html",
 		controller: "calcCTRL"
 	})
-	.otherwise("/calcs");
+	.when("/review/:reviewCalcID", {
+		templateUrl: "partials/reviewPartial.html",
+		controller: "reviewCTRL"
+	})
+	.otherwise("/menu");
 });

@@ -29,9 +29,10 @@ app.controller("menuCTRL", function ($scope, $route, authFactory, dataFactory) {
 
 				dataFactory.getDeleteByKey(currentCollection, id)
 				.then((response) => {
-					// console.log("The get/delete response is", response);
+					//nothing here
 				});
 			}
 		});
+		
 	};
 });

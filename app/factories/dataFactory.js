@@ -13,7 +13,6 @@ app.factory("dataFactory", function($q, $http, firebaseURL) {
         JSON.stringify(newCalc)
       	)
         .success((objectFromFirebase) => { // object returned is the key of the object in FB
-          console.log("obj form fb name", objectFromFirebase.name);
           currentCalcId = objectFromFirebase.name;
           resolve(objectFromFirebase);
         })
@@ -30,7 +29,6 @@ app.factory("dataFactory", function($q, $http, firebaseURL) {
         objectToEdit
       )
         .success((data) => {
-          console.log("Data from PUT", data);
           resolve(data);
         })
         .error((error) => {
@@ -69,14 +67,13 @@ app.factory("dataFactory", function($q, $http, firebaseURL) {
   };
 
   const getDeleteByKey = function(collection, calcID){
-  	console.log("Getting calcID ", calcID);
   	return $q((resolve, reject) => {
       $http.get(`${firebaseURL}/${collection}.json/?orderBy="calcID"&equalTo="${calcID}"`)
         .success((dataObject) => {
           let key = Object.keys(dataObject)[0];
           deleteData(key, collection)
           .then ((repsonse) => {
-          	// console.log("del response", repsonse);
+          	//nothing here
           })
           resolve(dataObject);
         })
@@ -84,7 +81,20 @@ app.factory("dataFactory", function($q, $http, firebaseURL) {
           reject(error);
         });
     });
-  }
+  };
 
-return {currentCalcId, postNewCalculation, putCalculation, getUserMetaData, deleteData, getDeleteByKey};
+  const getAnyCollectionData = function(collection, calcID){
+  	return $q((resolve, reject) => {
+      $http.get(`${firebaseURL}/${collection}.json/?orderBy="calcID"&equalTo="${calcID}"`)
+      .success((data) => {
+      	console.log("data", data);
+      	resolve(data);
+      })
+      .error((error) => {
+      	reject(error);
+      });
+  	});
+  };
+
+return {currentCalcId, postNewCalculation, putCalculation, getUserMetaData, deleteData, getDeleteByKey, getAnyCollectionData};
 })
