@@ -18,24 +18,20 @@ app.controller("menuCTRL", function ($scope, $route, authFactory, dataFactory) {
 
 	$scope.deleteDataCall = function(idToDelete){
 		let id = idToDelete;
+		let collectionNameArray = ["ToHit", "ToWound", "ArmorPen", "FirstSave", "SecondSave"];
 		dataFactory.deleteData(id, "MetaData")
 		.then((response) => {
 			console.log("delorted");
 		})
 		.then((response) => {
-			dataFactory.deleteData(id, "ToHit");
-		})
-		.then((response) => {
-			dataFactory.deleteData(id, "ToWound");
-		})
-		.then((response) => {
-			dataFactory.deleteData(id, "ArmorPen");
-		})
-		.then((response) => {
-			dataFactory.deleteData(id, "FirstSave");
-		})
-		.then((response) => {
-			dataFactory.deleteData(id, "SecondSave");
+			for(let i = 0; i < collectionNameArray.length; i++){
+				let currentCollection = collectionNameArray[i];
+
+				dataFactory.getDeleteByKey(currentCollection, id)
+				.then((response) => {
+					// console.log("The get/delete response is", response);
+				});
+			}
 		});
 	};
 });

@@ -68,5 +68,23 @@ app.factory("dataFactory", function($q, $http, firebaseURL) {
     });
   };
 
-return {currentCalcId, postNewCalculation, putCalculation, getUserMetaData, deleteData};
+  const getDeleteByKey = function(collection, calcID){
+  	console.log("Getting calcID ", calcID);
+  	return $q((resolve, reject) => {
+      $http.get(`${firebaseURL}/${collection}.json/?orderBy="calcID"&equalTo="${calcID}"`)
+        .success((dataObject) => {
+          let key = Object.keys(dataObject)[0];
+          deleteData(key, collection)
+          .then ((repsonse) => {
+          	// console.log("del response", repsonse);
+          })
+          resolve(dataObject);
+        })
+        .error((error) => {
+          reject(error);
+        });
+    });
+  }
+
+return {currentCalcId, postNewCalculation, putCalculation, getUserMetaData, deleteData, getDeleteByKey};
 })
