@@ -4,7 +4,7 @@ app.factory("dataFactory", function($q, $http, firebaseURL) {
 
 	var currentCalcId = null;
 
-	 const postNewCalculation = function(newCalc) {
+	const postNewCalculation = function(newCalc) {
     let queryString = newCalc.name;
 
    	return $q((resolve, reject) => {
@@ -87,7 +87,6 @@ app.factory("dataFactory", function($q, $http, firebaseURL) {
   	return $q((resolve, reject) => {
       $http.get(`${firebaseURL}/${collection}.json/?orderBy="calcID"&equalTo="${calcID}"`)
       .success((data) => {
-      	console.log("data", data);
       	resolve(data);
       })
       .error((error) => {

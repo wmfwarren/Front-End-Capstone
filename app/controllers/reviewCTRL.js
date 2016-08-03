@@ -1,30 +1,31 @@
 "use strict";
 
 app.controller("reviewCTRL", function($scope, $route, $routeParams, dataFactory) {
-	const toHitObject = {};
-	const toWoundObject = {};
-	const armorPenObject = {};
-	const firstSaveObject = {};
-	const secondSaveObject = {};
+	$scope.toHitObject = {};
+	$scope.toWoundObject = {};
+	$scope.armorPenObject = {};
+	$scope.firstSaveObject = {};
+	$scope.secondSaveObject = {};
 
 
 	const loadDataForReview = ((calcID) => {
-		let calcID = $routeParams.reviewCalcID;
+		calcID = $routeParams.reviewCalcID;
 		dataFactory.getAnyCollectionData("ToHit", calcID)
 		.then((response) => {
-			toHitObject = response;
+			$scope.toHitObject = response[Object.keys(response)[0]];
+			// console.log("tohit", toHitObject );
 			dataFactory.getAnyCollectionData("ToWound", calcID)
 			.then((response) => {
-				toWoundObject = response;
+				$scope.toWoundObject = response[Object.keys(response)[0]];
 				dataFactory.getAnyCollectionData("ArmorPen", calcID)
 				.then((response) => {
-					armorPenObject = response;
+					$scope.armorPenObject = response[Object.keys(response)[0]];
 					dataFactory.getAnyCollectionData("FirstSave", calcID)
 					.then((response) => {
-						firstSaveObject = response;
+						$scope.firstSaveObject = response[Object.keys(response)[0]];
 						dataFactory.getAnyCollectionData("SecondSave", calcID)
 						.then((response) => {
-							secondSaveObject = response;
+							$scope.secondSaveObject = response[Object.keys(response)[0]];
 						});//second save
 					});//first save
 				});//armor pen
