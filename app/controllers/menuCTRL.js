@@ -34,7 +34,7 @@ app.controller("menuCTRL", function ($scope, $route, authFactory, dataFactory) {
 
 				dataFactory.getDeleteByKey(currentCollection, id)
 				.then((response) => {
-					$scope.getUserMetaDataForSearch();
+					$route.reload();
 				});
 			}
 		});

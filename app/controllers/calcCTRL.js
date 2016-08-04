@@ -322,7 +322,6 @@ app.controller("calcCTRL", function ($scope, $route, dataFactory, authFactory, o
 		penObject.armorVal = armorValue;
 		let numOfHits = penObject.successfulHits;
 		let glanceTarget = armorValue - strength;
-		let penTarget = glanceTarget + 1;
 
 		let percentOverArray3D6 = [1.0,1.0,1.0,1.0,0.9953,0.9814,0.9537,0.9074,0.8379,0.7407,0.6250,0.5,0.3750,0.2592,0.1620,0.0925,0.0462,0.0185,0.0046];
 		let percentOverArray2D6 = [1.0,1.0,1.0,0.9722,0.9166,0.8333,0.7222,0.5833,0.4166,0.2777,0.1666,0.0833,0.0277];
@@ -343,6 +342,7 @@ app.controller("calcCTRL", function ($scope, $route, dataFactory, authFactory, o
 				penObject.successes = numOfHits * percentOverArray1D6[glanceTarget];
 			}
 		}
+		console.log(penObject, "penObject")
 		printWoundSuccesses(penObject);
 		return penObject;
 	} //end armor pen function
