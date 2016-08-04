@@ -325,7 +325,7 @@ app.controller("calcCTRL", function ($scope, $route, dataFactory, authFactory, o
 
 		let percentOverArray3D6 = [1.0,1.0,1.0,1.0,0.9953,0.9814,0.9537,0.9074,0.8379,0.7407,0.6250,0.5,0.3750,0.2592,0.1620,0.0925,0.0462,0.0185,0.0046];
 		let percentOverArray2D6 = [1.0,1.0,1.0,0.9722,0.9166,0.8333,0.7222,0.5833,0.4166,0.2777,0.1666,0.0833,0.0277];
-		let percentOverArray1D6 = [1.0,0.8333,0.6667,0.5000,0.3333,0.1667];
+		let percentOverArray1D6 = [1.0,1.0,0.8333,0.6667,0.5000,0.3333,0.1667];
 
 		if(penObject.dicePerHit === 3 ){
 			penObject.successes = numOfHits * percentOverArray3D6[glanceTarget];
@@ -413,16 +413,9 @@ app.controller("calcCTRL", function ($scope, $route, dataFactory, authFactory, o
 	}// end print save function
 	///*Second save*\\\
 	$scope.callSecondSave = function(){
-		//call with the right vehicle or infantry input.
-		if($scope.infantryBool){
-			//call save calc with the infantry successes
-			let secondSaveObject = new objectService.SecondSave(firstSaveFinal.successes, true);
-			secondSaveFinal = saveCalculator(secondSaveObject);
-		} else {
-			//call save calc with the vehicle successes
-			let secondSaveObject = new objectService.SecondSave(firstSaveFinal.successes, true);
-			secondSaveFinal = saveCalculator(secondSaveObject);
-		}
+	//call save calc with the infantry successes
+		let secondSaveObject = new objectService.SecondSave(firstSaveFinal.successes, true);
+		secondSaveFinal = saveCalculator(secondSaveObject);
 	}//end second save call
 /////***Save data functions***\\\\\
 	$scope.postNewCalc = function() {
@@ -476,4 +469,8 @@ app.controller("calcCTRL", function ($scope, $route, dataFactory, authFactory, o
 		let tagArray = tagString.split(/,/);
 		return tagArray;
 	}
+
+	$scope.reload = function(){
+		$route.reload();
+	};
 }); //closing controller

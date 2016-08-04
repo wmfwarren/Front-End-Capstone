@@ -6,7 +6,6 @@ app.controller("loginCTRL", function ($scope, $route, $location, authFactory) {
     authFactory.authWithProvider(authFactory.googleProvider)
     .then(function(result) {
       var user = result.user.uid;
-      $location.url("/menu");
       console.log("logged in user", user);
     }).catch(function(error) {
       console.log(error);

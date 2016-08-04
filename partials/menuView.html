@@ -8,16 +8,18 @@
 				<a class="waves-effect waves-light btn" ng-href="#/calcs">New Calculation</a>
 			</div>
 		</div>
-		<div class="row"> <!-- Search results -->
-			<div class="col s4 offset-s4 center-align" ng-repeat="metaData in userMetaDataEntries | filter:searchTerm">
-				<a href="#"><h4>{{metaData.title}}</h4></a>
+		<div class="row left"> <!-- Search results -->
+			<div class="col s4 center-align" ng-repeat="metaData in userMetaDataEntries | filter:searchTerm">
+				<h4>{{metaData.title}}</h4>
 				<p>{{metaData.comment}}</p>
 				<div class="tags" ng-repeat="tag in metaData.tags">
-					<p>{{tag}}</p>
+					<p>{{tag}}&nbsp;</p>
 				</div> <!-- tags closer -->
-				<a class="waves-effect waves-light btn" ng-click="deleteDataCall(metaData.calcID)">Delete</a>
-				<a class="waves-effect waves-light btn" ng-href="#/review/{{metaData.calcID}}" ng-click="">Review</a>
-				<a class="waves-effect waves-light btn" ng-href="#/note/{{metaData.calcID}}" ng-click="">Edit Notes</a>
+				<div>
+					<a class="waves-effect waves-light btn" ng-click="deleteDataCall(metaData.calcID)">Delete</a>
+					<a class="waves-effect waves-light btn" ng-href="#/review/{{metaData.calcID}}" ng-click="">Review</a>
+					<a class="waves-effect waves-light btn" ng-href="#/note/{{metaData.calcID}}" ng-click="">Edit Notes</a>
+				</div>
 			</div> <!-- repeated div for meta data -->
 		</div> <!-- container div for entries -->
 	</div>

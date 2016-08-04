@@ -26,5 +26,5 @@ app.config(function($routeProvider) {
 		templateUrl: "partials/notesView.html",
 		controller: "noteCTRL"
 	})
-	.otherwise("/menu");
+	.otherwise("/calcs");
 });

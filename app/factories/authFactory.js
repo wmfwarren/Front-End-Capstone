@@ -62,7 +62,7 @@ app.run(["$location", "FBCreds", "authFactory", function ($location, FBCreds, au
   firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
       authFactory.setUser(user.uid);
-      $location.url("/boards");
+      $location.url("/calcs");
     } else {
       $location.url("/login");
       authFactory.setUser(null); //this is to rest the current user to hide board.
