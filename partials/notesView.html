@@ -1,0 +1,11 @@
+<div class="container">
+	<div class="row">
+		<div class="col s4 offset-s4 center-align">
+			<input type="text" name="title" ng-model="currentMetaData.title" value="currentMetaData.title" placeholder="Title">
+			<textarea name="comment" ng-model="currentMetaData.comment" value="currentMetaData.comment" placeholder="Note">{{currentMetaData.comment}}</textarea>
+			<input type="text" name="tags" ng-model="tags" value="tags" placeholder="Tags">
+			<a class="waves-effect waves-light btn" ng-click="putData(currentMetaData)">Save</a>
+			<a class="waves-effect waves-light btn" ng-href="#/menu" ng-click="">Discard</a>
+		</div> 
+	</div> <!-- main row -->
+</div> <!-- outer container -->

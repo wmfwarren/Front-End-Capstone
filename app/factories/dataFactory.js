@@ -95,5 +95,18 @@ app.factory("dataFactory", function($q, $http, firebaseURL) {
   	});
   };
 
-return {currentCalcId, postNewCalculation, putCalculation, getUserMetaData, deleteData, getDeleteByKey, getAnyCollectionData};
+  const putMetaData = function(metaData) {
+  	console.log("metaData in PUT", metaData)
+  	return $q((resolve, reject) => {
+  		$http.put(`${firebaseURL}/MetaData/${metaData.calcID}.json`, metaData)
+  		.success((data) => {
+  			resolve(data);
+  		})
+  		.error((error) => {
+  			reject(error);
+  		})
+  	})
+  };
+
+return {currentCalcId, putMetaData, postNewCalculation, putCalculation, getUserMetaData, deleteData, getDeleteByKey, getAnyCollectionData};
 })

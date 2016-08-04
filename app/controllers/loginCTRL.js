@@ -1,12 +1,12 @@
 "use strict";
 
-app.controller("loginCTRL", function ($scope, $route, authFactory) {
+app.controller("loginCTRL", function ($scope, $route, $location, authFactory) {
 
   $scope.login = function(){
-  	console.log("Login initialized");
     authFactory.authWithProvider(authFactory.googleProvider)
     .then(function(result) {
       var user = result.user.uid;
+      $location.path("/menu");
       console.log("logged in user", user);
     }).catch(function(error) {
       console.log(error);

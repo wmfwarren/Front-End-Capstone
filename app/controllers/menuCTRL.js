@@ -4,7 +4,9 @@ app.controller("menuCTRL", function ($scope, $route, authFactory, dataFactory) {
 
 	$scope.userMetaDataEntries = [];
 
-	$scope.getUserMetaDataForSearch = (() => {
+
+	$scope.getUserMetaDataForSearch = function() {
+		console.log("I did a thing");
 		dataFactory.getUserMetaData(authFactory.getUser())
 		.then((response) => {
 			let object = response;
@@ -13,9 +15,12 @@ app.controller("menuCTRL", function ($scope, $route, authFactory, dataFactory) {
       	$scope.userMetaDataEntries.push(object[key]);
     	});
 			console.log("response of meta", $scope.userMetaDataEntries);
-		}); //colse iify function
-	})(); //invoke the iife
+		}); 
+	}; 
 
+	$scope.getUserMetaDataForSearch();
+
+	
 	$scope.deleteDataCall = function(idToDelete){
 		let id = idToDelete;
 		let collectionNameArray = ["ToHit", "ToWound", "ArmorPen", "FirstSave", "SecondSave"];
@@ -29,7 +34,7 @@ app.controller("menuCTRL", function ($scope, $route, authFactory, dataFactory) {
 
 				dataFactory.getDeleteByKey(currentCollection, id)
 				.then((response) => {
-					// $scope.getUserMetaDataForSearch();
+					$scope.getUserMetaDataForSearch();
 				});
 			}
 		});

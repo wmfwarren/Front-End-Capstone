@@ -22,5 +22,9 @@ app.config(function($routeProvider) {
 		templateUrl: "partials/reviewPartial.html",
 		controller: "reviewCTRL"
 	})
+	.when("/note/:noteID", {
+		templateUrl: "partials/notesView.html",
+		controller: "noteCTRL"
+	})
 	.otherwise("/menu");
 });

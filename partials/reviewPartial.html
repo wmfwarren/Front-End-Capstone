@@ -2,8 +2,57 @@
 	<div class="row">
 		<div class="col s6 offset-s3 center-align">
 			<div id="attackType" class="col s10 offset-s1 center-align">
-				
+				<h4>Attack Type: {{toHitObject.shootingAttack ? "Shooting" : "Close Combat"}}</h4>
+				<div ng-show="toHitObject.shootingAttack" class="col s10 offset-s1 center-align">
+					<p>Ballistic Skill: {{toHitObject.ballisticSkill}}</p>
+					<p>Dice rolled: {{toHitObject.numOfDice}}</p>
+					<p>Successful Hits: {{toHitObject.successes.toFixed(2)}}</p>
+				</div> <!-- Shooting -->
+				<div ng-show="!toHitObject.shootingAttack" class="col s10 offset-s1 center-align">
+					<p>Attacker Weapon Skill: {{toHitObject.attackerWepSkill}}</p>
+					<p>Defender Weapon Skill: {{toHitObject.defenderWepSkill}}</p>
+					<p>Dice rolled: {{toHitObject.numOfDice}}</p>
+					<p>Successful Hits: {{toHitObject.successes.toFixed(2)}}</p>
+				</div> <!-- CC -->
+				<p ng-show="toHitObject.rerollAll">Rerolled All</p>
+				<p ng-show="toHitObject.rerollOnes">Rerolled Ones</p>
+				<p ng-show="toHitObject.rerollSingle">Rerolled One Die</p>
+				<p ng-show="toHitObject.autoHit">Auto-Hit</p>
 			</div> <!-- Attack Div -->
+			<div ng-show="toWoundObject" class="col s10 offset-s1 center-align">
+				<h5>Wounds</h5>
+				<p>Weapon Strength: {{toWoundObject.weaponStrength}}</p>
+				<p>Defender Toughness: {{toWoundObject.toughness}}</p>
+				<p>Successful Wounds: {{toWoundObject.successes.toFixed(2)}}</p>
+				<p ng-show="toWoundObject.rerollAll">Rerolled All</p>
+				<p ng-show="toWoundObject.rerollOnes">Rerolled Ones</p>
+				<p ng-show="toWoundObject.rerollSingle">Rerolled One Die</p>
+				<p ng-show="toWoundObject.autoWoundOnX">Auto-Wound on {{toWoundObject.xForAutowound}}</p>
+			</div> <!-- wounding --> 
+			<div ng-show="armorPenObject" class="col s10 offset-s1 center-align">
+				<h5>Armor Penetration</h5>
+				<p>Weapon Strength: {{armorPenObject.weaponStrength}}</p>
+				<p>Armor Value: {{armorPenObject.armorVal}}</p>
+				<p>Penetration Dice: {{armorPenObject.dicePerHit}}</p>
+				<p>Glancing Hits: {{armorPenObject.successes.toFixed(2)}}</p>
+			</div> <!-- armor pen -->
+			<div ng-show="firstSaveObject" class="col s10 offset-s1 center-align">
+				<h5>Save</h5>
+				<p>Save Target: {{firstSaveObject.target}}</p>
+				<p>Unsaved Wounds: {{firstSaveObject.successes.toFixed(2)}}</p>
+				<p ng-show="firstSaveObject.rerollAll">Rerolled All</p>
+				<p ng-show="firstSaveObject.rerollOnes">Rerolled Ones</p>
+			</div> <!-- first save -->
+			<div ng-show="secondSaveObject" class="col s10 offset-s1 center-align">
+				<h5>Second Save</h5>
+				<p>Save Target: {{secondSaveObject.target}}</p>
+				<p>Unsaved Wounds: {{secondSaveObject.successes.toFixed(2)}}</p>
+				<p ng-show="secondSaveObject.rerollAll">Rerolled All</p>
+				<p ng-show="secondSaveObject.rerollOnes">Rerolled Ones</p>
+			</div> <!-- second save -->
+			<div class="col s10 offset-s1 center-align">
+				<a class="waves-effect waves-light btn" ng-href="#/menu" ng-click="">Main Menu</a>
+			</div>
 		</div> <!-- parent col div -->
 	</div> <!-- parent row -->
 </div> <!-- container -->
