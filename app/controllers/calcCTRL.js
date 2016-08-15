@@ -379,29 +379,55 @@ app.controller("calcCTRL", function ($scope, $route, dataFactory, authFactory, o
 	}; //end first save call
 
 	function saveCalculator(saveObject) {
-		let saveTarget = $scope.firstSave;
-		saveObject.target = saveTarget;
+		let saveTargetOne = $scope.firstSave;
+		let saveTargetTwo = $scope.secondSave;
+		if(saveObject.name === "FirstSave"){
+			saveObject.target = saveTargetOne;
+		} else {
+			saveObject.target = saveTargetTwo;
+		}
+
 		let savesToRoll = saveObject.successfulWounds;
 
 		//reroll all
-		if (($scope.rerollAllSave1 && saveObject.name === "FirstSave") || ($scope.rerollAllSave2 && saveObject.name === "SecondSave")){
-		saveObject.successes = saveObject.successfulWounds - (savesToRoll * (((7 - saveTarget)/6.0) + ((1 * (saveTarget - 1)/6.0) * (7 - saveTarget)/6.0)));
-		saveObject.rerollAll = true;
-		printSave(saveObject);
-		return saveObject;
+		if ($scope.rerollAllSave1 && saveObject.name === "FirstSave"){
+			saveObject.successes = saveObject.successfulWounds - (savesToRoll * (((7 - saveTargetOne)/6.0) + ((1 * (saveTargetOne - 1)/6.0) * (7 - saveTargetOne)/6.0)));
+			saveObject.rerollAll = true;
+			printSave(saveObject);
+			return saveObject;
 		} 
+		if($scope.rerollAllSave2 && saveObject.name === "SecondSave"){
+			saveObject.successes = (firstSaveFinal.successes) - (firstSaveFinal.successes * (((7 - saveTargetTwo)/6.0) + ((1 * (saveTargetTwo - 1)/6.0) * (7 - saveTargetTwo)/6.0)));
+			saveObject.rerollAll = true;
+			printSave(saveObject);
+			return saveObject;
+		}
 		//reroll 1's
-		if (($scope.rerollOnesSave1 && saveObject.name === "FirstSave") || ($scope.reroll1sSave2 && saveObject.name === "SecondSave")){
-			saveObject.successes = saveObject.successfulWounds - (savesToRoll * (((7 - saveTarget)/6.0) + ((1 * 1.0/6.0) * (7 - saveTarget)/6.0)));
+		if ($scope.rerollOnesSave1 && saveObject.name === "FirstSave"){
+			saveObject.successes = saveObject.successfulWounds - (savesToRoll * (((7 - saveTargetOne)/6.0) + ((1 * 1.0/6.0) * (7 - saveTargetOne)/6.0)));
+			saveObject.rerollAll = true;
+			printSave(saveObject);
+			return saveObject;
+		}
+		if($scope.reroll1sSave2 && saveObject.name === "SecondSave"){
+			saveObject.successes = (firstSaveFinal.successes) - (firstSaveFinal.successes * (((7 - saveTargetTwo)/6.0) + ((1 * 1.0/6.0) * (7 - saveTargetTwo)/6.0))) ;
 			saveObject.rerollAll = true;
 			printSave(saveObject);
 			return saveObject;
 		}
 		//standard
 		//set bool if not set
-		saveObject.successes = saveObject.successfulWounds - (savesToRoll * ((7 - saveTarget)/6.0));
-		printSave(saveObject);
-		return saveObject;
+		if (saveObject.name === "FirstSave"){
+			saveObject.successes = saveObject.successfulWounds - (savesToRoll * ((7 - saveTargetOne)/6.0));
+			printSave(saveObject);
+			return saveObject;
+		}
+		if(saveObject.name === "SecondSave"){
+			saveObject.successes = (firstSaveFinal.successes) - (firstSaveFinal.successes * ((7 - saveTargetTwo)/6.0));
+			printSave(saveObject);
+			return saveObject;
+		}
+
 	}
 
 	function printSave(object) {
