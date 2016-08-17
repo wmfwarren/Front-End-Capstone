@@ -1,0 +1,10 @@
+<nav ng-controller="navCTRL">
+  <div class="nav-wrapper">
+    <a href="#" class="brand-logo"></a>
+    <ul id="nav-mobile" class="right hide-on-small-and-down">
+      <li><a ng-href="#/menu">Menu</a></li>
+      <li><a ng-href="#/calcs">Calculator</a></li>
+      <li><a ng-href="#/login" ng-click="logout()">{{authFactory.currentUserId ? "Login" : "Logout"}}</a></li>
+    </ul>
+  </div>
+</nav>
